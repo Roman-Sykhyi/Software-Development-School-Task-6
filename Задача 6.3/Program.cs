@@ -6,11 +6,19 @@ namespace Задача_6._3
     {
         static void Main(string[] args)
         {
-            Matrix matrix = new Matrix(3, 3);
+            Matrix<int> matrix = new Matrix<int>(3, 3);
 
-            foreach (int numb in matrix)
+            for (int i = 0; i < matrix.value.GetLength(0); i++)
             {
-                Console.WriteLine(numb);
+                for (int j = 0; j < matrix.value.GetLength(1); j++)
+                {
+                    matrix.value[i, j] = i + j;
+                }
+            }
+
+            foreach (int n in matrix)
+            {
+                Console.Write(n + " ");
             }
         }
     }

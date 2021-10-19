@@ -5,32 +5,21 @@ using System.Text;
 
 namespace Задача_6._3
 {
-    public class Matrix : IEnumerable
+    public class Matrix <T> : IEnumerable
     {
-        private int[][] value;
+        public T[,] value;
         private int rows, columns;
 
         public Matrix(int m, int n)
         {
-            value = new int[m][];
+            value = new T[m, n];
             rows = m;
             columns = n;
-
-            for (int i = 0; i < m; i++)
-                value[i] = new int[n];
-
-            for (int i = 0; i < m; i++)
-            {
-                for (int j = 0; j < n; j++)
-                {
-                    value[i][j] = i + j;
-                }
-            }
         }
 
-        public MatrixEnum GetEnumerator()
+        public MatrixEnum<T> GetEnumerator()
         {
-            return new MatrixEnum(value, rows, columns);
+            return new MatrixEnum<T>(value, rows, columns);
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -39,13 +28,13 @@ namespace Задача_6._3
         }
     }
 
-    public class MatrixEnum : IEnumerator
+    public class MatrixEnum<T> : IEnumerator
     {
-        private int[][] value;
+        private T[,] value;
         private int rows, columns;
         int positionI, positionJ;
 
-        public MatrixEnum(int[][] arr, int m, int n)
+        public MatrixEnum(T[,] arr, int m, int n)
         {
             value = arr;
             rows = m;
@@ -74,13 +63,13 @@ namespace Задача_6._3
             positionJ = columns;
         }
 
-        public int Current
+        public T Current
         {
             get
             {
                 try
                 {
-                    return value[positionI][positionJ];
+                    return value[positionI, positionJ];
                 }
                 catch (IndexOutOfRangeException)
                 {
